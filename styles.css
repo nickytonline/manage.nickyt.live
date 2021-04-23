@@ -1,0 +1,13 @@
+    body {
+      /* display: grid;
+      place-content: center; */
+      color: #fff;
+      font-size: 10rem;
+    }
+
+    .start {
+      position: absolute;
+      left: 200px;
+      bottom: -45px;
+      border: 1px solid yellow;
+    }
