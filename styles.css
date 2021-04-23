@@ -1,13 +1,22 @@
     body {
-      /* display: grid;
-      place-content: center; */
-      color: #fff;
       font-size: 10rem;
+      color: #fff;
+      position: relative;
     }
 
     .start {
+      opacity: 0;
       position: absolute;
-      left: 200px;
-      bottom: -45px;
-      border: 1px solid yellow;
+      animation: move 20s;
     }
+
+@keyframes move {
+  0% {
+    opacity: 1;
+    transform: translate(-20vw, 75vh);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(140vw, 75vh);
+  }
+}
