@@ -63,8 +63,10 @@ for (const [, piece] of pieces.entries()) {
 export function chatInteractions() {
   ComfyJS.onCommand = (user, command, message, flags, extra) => {
     const [pieceName, direction] = command.split('-');
+    const piece = pieces.get(pieceName);
 
-    movePiece(direction, pieces.get(pieceName))
+    piece.style.opacity = "1";
+    movePiece(direction, piece);
   };
 
   ComfyJS.Init("nickytonline");
