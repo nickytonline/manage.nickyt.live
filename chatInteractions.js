@@ -1,4 +1,5 @@
 const MOVE_DISTANCE = 4;
+const DIRECTIONS = Object.freeze(['left', 'right', 'up', 'down']);
 
 function createPiece(text) {
   const piece = document.createElement("div");
@@ -56,16 +57,39 @@ pieces.set("crate", createPiece("📦"));
 pieces.set("todd", createPiece("🦞"));
 pieces.set("forem", createPiece("🌱"));
 
-for (const [, piece] of pieces.entries()) {
+const spawned = new Set();
+
+function spawn(pieceName) {
+  if (!pieces.has(pieceName)) {
+    console.log(`There are no pieces that exist with the name ${pieceName}`);
+    return null;
+  }
+
+  const piece = pieces.get(pieceName);
+
+  if (spawned.has(piece)) {
+    console.log(`The piece ${pieceName} has already been spawned`);
+    return piece;
+  }
+
   document.body.appendChild(piece);
+  piece.style.opacity = 1;
+  spawned.add(piece);
+
+  return piece;
 }
 
 export function chatInteractions() {
   ComfyJS.onCommand = (user, command, message, flags, extra) => {
     const [pieceName, direction] = command.split('-');
-    const piece = pieces.get(pieceName);
 
-    piece.style.opacity = "1";
+    const piece = spawn(pieceName);
+
+    if (direction == null || !DIRECTIONS.includes(direction)) {
+      console.log(`There is no direction ${direction} defined.`);
+      return;
+    }
+
     movePiece(direction, piece);
   };
 
