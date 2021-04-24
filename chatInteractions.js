@@ -54,6 +54,7 @@ const pieces = new Map();
 pieces.set("crab", createPiece("🦀"));
 pieces.set("crate", createPiece("📦"));
 pieces.set("todd", createPiece("🦞"));
+pieces.set("forem", createPiece("🌱"));
 
 for (const [, piece] of pieces.entries()) {
   document.body.appendChild(piece);
