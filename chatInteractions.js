@@ -74,7 +74,10 @@ function spawn(pieceName) {
   }
 
   document.body.appendChild(piece);
-  piece.style.opacity = 1;
+
+  setTimeout(() => {
+    piece.style.opacity = 1;
+  }, 0);
   spawned.add(piece);
 
   return piece;
