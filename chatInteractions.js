@@ -2,9 +2,10 @@ const MOVE_DISTANCE = 4;
 const DIRECTIONS = Object.freeze(['left', 'right', 'up', 'down']);
 
 function createPiece(text) {
-  const piece = document.createElement("div");
-  piece.className = "piece";
-  piece.innerHTML = text;
+  const piece = Object.assign(document.createElement("div"), {
+    className: "piece",
+    innerHTML: text
+  });
 
   return piece;
 }
@@ -79,7 +80,7 @@ function spawn(pieceName) {
   return piece;
 }
 
-export function chatInteractions() {
+export function inializeChatInteractions() {
   ComfyJS.onCommand = (user, command, message, flags, extra) => {
     const [pieceName, direction] = command.split('-');
 
