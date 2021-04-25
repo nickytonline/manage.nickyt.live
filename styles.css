@@ -9,6 +9,6 @@ body {
   --y-position: 87vh;
   position: absolute;
   transform: translate(var(--x-position), var(--y-position));
-  transition: opacity, transform 1s ease-out;
+  transition: opacity 1s ease-in, transform 1s ease-in-out;
   opacity: 0;
 }
