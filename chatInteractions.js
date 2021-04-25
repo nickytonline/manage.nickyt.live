@@ -2,9 +2,9 @@ const MOVE_DISTANCE = 4;
 const DIRECTIONS = Object.freeze(['left', 'right', 'up', 'down']);
 
 function createPiece(text) {
-  const piece = Object.assign(document.createElement("div"), {
-    className: "piece",
-    innerHTML: text
+  const piece = Object.assign(document.createElement('div'), {
+    className: 'piece',
+    innerHTML: text,
   });
 
   return piece;
@@ -12,37 +12,37 @@ function createPiece(text) {
 
 function moveX(distance, piece) {
   const currentXPosition = getComputedStyle(piece).getPropertyValue(
-    "--x-position"
+    '--x-position',
   );
   const newXPosition = `${parseInt(currentXPosition, 10) + distance}vw`;
 
-  piece.style.setProperty("--x-position", newXPosition);
+  piece.style.setProperty('--x-position', newXPosition);
 }
 
 function moveY(distance, piece) {
   const currentYPosition = getComputedStyle(piece).getPropertyValue(
-    "--y-position"
+    '--y-position',
   );
   const newYPosition = `${parseInt(currentYPosition, 10) + distance}vh`;
 
-  piece.style.setProperty("--y-position", newYPosition);
+  piece.style.setProperty('--y-position', newYPosition);
 }
 
 function movePiece(direction, piece) {
   switch (direction) {
-    case "left":
+    case 'left':
       moveX(-MOVE_DISTANCE, piece);
       break;
 
-    case "right":
+    case 'right':
       moveX(MOVE_DISTANCE, piece);
       break;
 
-    case "down":
+    case 'down':
       moveY(MOVE_DISTANCE, piece);
       break;
 
-    case "up":
+    case 'up':
       moveY(-MOVE_DISTANCE, piece);
       break;
 
@@ -53,10 +53,10 @@ function movePiece(direction, piece) {
 
 const pieces = new Map();
 
-pieces.set("crab", createPiece("🦀"));
-pieces.set("crate", createPiece("📦"));
-pieces.set("todd", createPiece("🦞"));
-pieces.set("forem", createPiece("🌱"));
+pieces.set('crab', createPiece('🦀'));
+pieces.set('crate', createPiece('📦'));
+pieces.set('todd', createPiece('🦞'));
+pieces.set('forem', createPiece('🌱'));
 
 const spawned = new Set();
 
@@ -97,5 +97,5 @@ export function inializeChatInteractions() {
     movePiece(direction, piece);
   };
 
-  ComfyJS.Init("nickytonline");
+  ComfyJS.Init('nickytonline');
 }
