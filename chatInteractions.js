@@ -1,6 +1,13 @@
 const MOVE_DISTANCE = 4;
 const DIRECTIONS = Object.freeze(['left', 'right', 'up', 'down']);
 const alpaca = document.querySelector('.alpaca');
+const spawned = new Set();
+const pieces = new Map();
+
+pieces.set('crab', createPiece('🦀'));
+pieces.set('crate', createPiece('📦'));
+pieces.set('todd', createPiece('🦞'));
+pieces.set('forem', createPiece('🌱'));
 
 function createPiece(text) {
   const piece = Object.assign(document.createElement('div'), {
@@ -51,15 +58,6 @@ function movePiece(piece, direction) {
       break;
   }
 }
-
-const pieces = new Map();
-
-pieces.set('crab', createPiece('🦀'));
-pieces.set('crate', createPiece('📦'));
-pieces.set('todd', createPiece('🦞'));
-pieces.set('forem', createPiece('🌱'));
-
-const spawned = new Set();
 
 function spawn(pieceName) {
   if (!pieces.has(pieceName)) {
