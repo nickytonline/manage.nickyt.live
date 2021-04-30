@@ -1,5 +1,6 @@
 const MOVE_DISTANCE = 4;
 const DIRECTIONS = Object.freeze(['left', 'right', 'up', 'down']);
+const alpaca = document.querySelector('.alpaca');
 
 function createPiece(text) {
   const piece = Object.assign(document.createElement('div'), {
@@ -28,7 +29,7 @@ function moveY(distance, piece) {
   piece.style.setProperty('--y-position', newYPosition);
 }
 
-function movePiece(direction, piece) {
+function movePiece(piece, direction) {
   switch (direction) {
     case 'left':
       moveX(-MOVE_DISTANCE, piece);
@@ -83,18 +84,46 @@ function spawn(pieceName) {
   return piece;
 }
 
+let alpacaTimeout = 0;
+
+function handleAlpaca(command) {
+  if (alpacaTimeout) {
+    clearTimeout(alpacaTimeout);
+  }
+
+  switch (command) {
+    case "hide": {
+      alpaca.classList.add('alpaca--hide');
+
+      alpacaTimeout = setTimeout(() => {
+        alpaca.classList.remove('alpaca--hide')
+      }, 11000);
+      break;
+    }
+
+    default:
+      break;
+  }
+}
+
 export function inializeChatInteractions() {
   ComfyJS.onCommand = (user, command, message, flags, extra) => {
-    const [pieceName, direction] = command.split('-');
+    const [pieceName, pieceCommand] = command.split('-');
 
-    const piece = spawn(pieceName);
-
-    if (direction == null || !DIRECTIONS.includes(direction)) {
-      console.log(`There is no direction ${direction} defined.`);
+    if (pieceName === 'alpaca') {
+      handleAlpaca(pieceCommand);
       return;
     }
 
-    movePiece(direction, piece);
+    // Handle movable pieces
+    const piece = spawn(pieceName);
+
+    if (pieceCommand == null || !DIRECTIONS.includes(pieceCommand)) {
+      console.log(`There is no direction ${pieceCommand} defined.`);
+      return;
+    }
+
+    movePiece(piece, pieceCommand);
   };
 
   ComfyJS.Init('nickytonline');
