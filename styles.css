@@ -12,3 +12,20 @@ body {
   transition: opacity 1s ease-in, transform 1s ease-in-out;
   opacity: 0;
 }
+
+.alpaca {
+  position: absolute;
+  width: 268px;
+  height: 333px;
+  bottom: 3px;
+  --x-position: 0vw;
+  --y-position: 0vh;
+  transform: translate(var(--x-position), var(--y-position));
+  background-image: url(assets/images/alpaca.png);
+  background-size: cover;
+  transition: transform 1s ease-in-out;
+}
+
+.alpaca--hide {
+  --y-position: 333px;
+}
