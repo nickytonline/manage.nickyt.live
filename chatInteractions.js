@@ -7,7 +7,9 @@ const pieces = new Map();
 pieces.set('crab', createPiece('🦀'));
 pieces.set('crate', createPiece('📦'));
 pieces.set('todd', createPiece('🦞'));
-pieces.set('forem', createPiece('🌱'));
+pieces.set('poop', createPiece('💩'));
+pieces.set('curling', createPiece('🥌'));
+pieces.set('donut', createPiece('🍩'));
 
 function createPiece(text) {
   const piece = Object.assign(document.createElement('div'), {
@@ -19,18 +21,16 @@ function createPiece(text) {
 }
 
 function moveX(distance, piece) {
-  const currentXPosition = getComputedStyle(piece).getPropertyValue(
-    '--x-position',
-  );
+  const currentXPosition =
+    getComputedStyle(piece).getPropertyValue('--x-position');
   const newXPosition = `${parseInt(currentXPosition, 10) + distance}vw`;
 
   piece.style.setProperty('--x-position', newXPosition);
 }
 
 function moveY(distance, piece) {
-  const currentYPosition = getComputedStyle(piece).getPropertyValue(
-    '--y-position',
-  );
+  const currentYPosition =
+    getComputedStyle(piece).getPropertyValue('--y-position');
   const newYPosition = `${parseInt(currentYPosition, 10) + distance}vh`;
 
   piece.style.setProperty('--y-position', newYPosition);
@@ -90,11 +90,11 @@ function handleAlpaca(command) {
   }
 
   switch (command) {
-    case "hide": {
+    case 'hide': {
       alpaca.classList.add('alpaca--hide');
 
       alpacaTimeout = setTimeout(() => {
-        alpaca.classList.remove('alpaca--hide')
+        alpaca.classList.remove('alpaca--hide');
       }, 11000);
       break;
     }
@@ -108,20 +108,39 @@ export function inializeChatInteractions() {
   ComfyJS.onCommand = (user, command, message, flags, extra) => {
     const [pieceName, pieceCommand] = command.split('-');
 
-    if (pieceName === 'alpaca') {
-      handleAlpaca(pieceCommand);
-      return;
+    switch (pieceName) {
+      case 'setup': {
+        let count = 0;
+        for (const [name, ] of pieces.entries()) {
+          const piece = spawn(name);
+
+          if (count > 0) {
+            for (const counter of new Array(count)) {
+              movePiece(piece, 'left')
+            }
+          }
+
+          count++;
+        }
+      }
+
+      case 'alpaca': {
+        handleAlpaca(pieceCommand);
+        return;
+      }
+
+      default: {
+        // Handle movable pieces
+        const piece = spawn(pieceName);
+
+        if (pieceCommand == null || !DIRECTIONS.includes(pieceCommand)) {
+          console.log(`There is no direction ${pieceCommand} defined.`);
+          return;
+        }
+
+        movePiece(piece, pieceCommand);
+      }
     }
-
-    // Handle movable pieces
-    const piece = spawn(pieceName);
-
-    if (pieceCommand == null || !DIRECTIONS.includes(pieceCommand)) {
-      console.log(`There is no direction ${pieceCommand} defined.`);
-      return;
-    }
-
-    movePiece(piece, pieceCommand);
   };
 
   ComfyJS.Init('nickytonline');
