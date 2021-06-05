@@ -5,14 +5,18 @@ body {
   background-color: #000;
 }
 
-.piece {
+.piece, .subscriber--piece {
   --x-position: 95vw;
-  --y-position: 70vh;
+  --y-position: 65vh;
   font-size: 5rem;
   position: absolute;
   transform: translate(var(--x-position), var(--y-position));
   transition: opacity 1s ease-in, transform 1s ease-in-out;
   opacity: 0;
+}
+
+.subscriber--piece {
+  --y-position: 15vh;
 }
 
 .alpaca {
