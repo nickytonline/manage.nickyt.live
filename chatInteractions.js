@@ -3,17 +3,20 @@ const DIRECTIONS = Object.freeze(['left', 'right', 'up', 'down']);
 const alpaca = document.querySelector('.alpaca');
 const spawned = new Set();
 const pieces = new Map();
+const subscriberPieces = new Map();
 
 pieces.set('crab', createPiece('🦀'));
 pieces.set('crate', createPiece('📦'));
 pieces.set('todd', createPiece('🦞'));
 pieces.set('poop', createPiece('💩'));
-pieces.set('curling', createPiece('🥌'));
 pieces.set('donut', createPiece('🍩'));
 
-function createPiece(text) {
+subscriberPieces.set('curling', createPiece('🥌', true));
+subscriberPieces.set('unicorn', createPiece('🦄', true));
+
+function createPiece(text, subscriber = false) {
   const piece = Object.assign(document.createElement('div'), {
-    className: 'piece',
+    className: subscriber ? 'subscriber--piece': 'piece',
     innerHTML: text,
   });
 
@@ -36,7 +39,15 @@ function moveY(distance, piece) {
   piece.style.setProperty('--y-position', newYPosition);
 }
 
-function movePiece(piece, direction) {
+function movePiece(piece, direction, flags = { subscriber: false }) {
+  const { subscriber = false } = flags;
+
+  if (piece.classList.contains('subscriber--piece') && !subscriber) {
+    console.log('You are not a subscriber. This piece requires a subscription.');
+
+    return;
+  }
+
   switch (direction) {
     case 'left':
       moveX(-MOVE_DISTANCE, piece);
@@ -59,13 +70,25 @@ function movePiece(piece, direction) {
   }
 }
 
-function spawn(pieceName) {
-  if (!pieces.has(pieceName)) {
+function spawn(pieceName, flags = { subscriber: false }) {
+  const { subscriber = false } = flags
+
+  if (!pieces.has(pieceName) && !subscriberPieces.has(pieceName)) {
     console.log(`There are no pieces that exist with the name ${pieceName}`);
     return null;
   }
 
-  const piece = pieces.get(pieceName);
+  let piece = pieces.get(pieceName);
+
+  if (!piece && subscriber) {
+    piece = subscriberPieces.get(pieceName);
+  }
+
+  if (!piece) {
+    console.log('You are not a subscriber. This piece requires a subscription.');
+
+    return null;
+  }
 
   if (spawned.has(piece)) {
     console.log(`The piece ${pieceName} has already been spawned`);
@@ -109,36 +132,29 @@ export function inializeChatInteractions() {
     const [pieceName, pieceCommand] = command.split('-');
 
     switch (pieceName) {
-      case 'setup': {
-        let count = 0;
-        for (const [name, ] of pieces.entries()) {
-          const piece = spawn(name);
+      case 'setup':
+        spawn('donut');
+        break;
 
-          if (count > 0) {
-            for (const counter of new Array(count)) {
-              movePiece(piece, 'left')
-            }
-          }
-
-          count++;
-        }
-      }
-
-      case 'alpaca': {
+      case 'alpaca':
         handleAlpaca(pieceCommand);
-        return;
-      }
+        break;
 
       default: {
         // Handle movable pieces
-        const piece = spawn(pieceName);
+        const piece = spawn(pieceName, flags);
+
+        if (!piece) {
+          return;
+        }
 
         if (pieceCommand == null || !DIRECTIONS.includes(pieceCommand)) {
           console.log(`There is no direction ${pieceCommand} defined.`);
           return;
         }
 
-        movePiece(piece, pieceCommand);
+        movePiece(piece, pieceCommand, flags);
+        break;
       }
     }
   };
