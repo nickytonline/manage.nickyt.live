@@ -4,6 +4,10 @@ const alpaca = document.querySelector('.alpaca');
 const spawned = new Set();
 const pieces = new Map();
 const subscriberPieces = new Map();
+const CURLING_PIECENAME = 'curl';
+const curlingSound = new Audio('/assets/sounds/curling.m4a');
+
+curlingSound.volume = 0.5;
 
 pieces.set('crab', createPiece('🦀'));
 pieces.set('crate', createPiece('📦'));
@@ -11,7 +15,7 @@ pieces.set('todd', createPiece('🦞'));
 pieces.set('poop', createPiece('💩'));
 pieces.set('donut', createPiece('🍩'));
 
-subscriberPieces.set('curling', createPiece('🥌', true));
+subscriberPieces.set(CURLING_PIECENAME, createPiece('🥌', true));
 subscriberPieces.set('unicorn', createPiece('🦄', true));
 
 function createPiece(text, subscriber = false) {
@@ -39,7 +43,7 @@ function moveY(distance, piece) {
   piece.style.setProperty('--y-position', newYPosition);
 }
 
-function movePiece(piece, direction, flags = { subscriber: false }) {
+function movePiece(piece, direction, flags = { subscriber: false }, sound) {
   const { subscriber = false } = flags;
 
   if (piece.classList.contains('subscriber--piece') && !subscriber) {
@@ -47,6 +51,8 @@ function movePiece(piece, direction, flags = { subscriber: false }) {
 
     return;
   }
+
+  sound?.play();
 
   switch (direction) {
     case 'left':
@@ -141,7 +147,7 @@ export function inializeChatInteractions() {
         break;
 
       default: {
-        // Handle movable pieces
+        const sound = pieceName === CURLING_PIECENAME ? curlingSound : null;
         const piece = spawn(pieceName, flags);
 
         if (!piece) {
@@ -153,7 +159,7 @@ export function inializeChatInteractions() {
           return;
         }
 
-        movePiece(piece, pieceCommand, flags);
+        movePiece(piece, pieceCommand, flags, sound);
         break;
       }
     }
