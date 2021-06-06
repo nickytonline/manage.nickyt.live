@@ -138,10 +138,6 @@ export function inializeChatInteractions() {
     const [pieceName, pieceCommand] = command.split('-');
 
     switch (pieceName) {
-      case 'setup':
-        spawn('donut');
-        break;
-
       case 'alpaca':
         handleAlpaca(pieceCommand);
         break;
