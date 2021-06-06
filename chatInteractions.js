@@ -43,7 +43,7 @@ function moveY(distance, piece) {
   piece.style.setProperty('--y-position', newYPosition);
 }
 
-function movePiece(piece, direction, flags = { subscriber: false }, sound) {
+function movePiece({ piece, direction, flags, sound }) {
   const { subscriber = false } = flags;
 
   if (piece.classList.contains('subscriber--piece') && !subscriber) {
@@ -159,7 +159,7 @@ export function inializeChatInteractions() {
           return;
         }
 
-        movePiece(piece, pieceCommand, flags, sound);
+        movePiece({ piece, direction: pieceCommand, flags, sound });
         break;
       }
     }
