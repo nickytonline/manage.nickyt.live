@@ -120,3 +120,5 @@ dist
 
 # Because Mac
 .DS_Store
+
+.netlify/state.json
