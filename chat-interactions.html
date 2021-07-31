@@ -1,19 +1,20 @@
 <html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/modern-css-reset/dist/reset.min.css"
+    />
 
-<head>
-  <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
+  </head>
 
-  <link rel="stylesheet" href="./styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
-</head>
+  <body>
+    <div class="alpaca"></div>
+    <script type="module">
+      import { inializeChatInteractions } from './chatInteractions.js';
 
-<body>
-  <div class="alpaca"></div>
-  <script type="module">
-    import { inializeChatInteractions } from './chatInteractions.js'
-
-    inializeChatInteractions();
-  </script>
-</body>
-
+      inializeChatInteractions();
+    </script>
+  </body>
 </html>

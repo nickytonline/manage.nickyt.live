@@ -20,7 +20,7 @@ subscriberPieces.set('unicorn', createPiece('🦄', true));
 
 function createPiece(text, subscriber = false) {
   const piece = Object.assign(document.createElement('div'), {
-    className: subscriber ? 'subscriber--piece': 'piece',
+    className: subscriber ? 'subscriber--piece' : 'piece',
     innerHTML: text,
   });
 
@@ -47,7 +47,9 @@ function movePiece({ piece, direction, flags, sound }) {
   const { subscriber = false } = flags;
 
   if (piece.classList.contains('subscriber--piece') && !subscriber) {
-    console.log('You are not a subscriber. This piece requires a subscription.');
+    console.log(
+      'You are not a subscriber. This piece requires a subscription.',
+    );
 
     return;
   }
@@ -77,7 +79,7 @@ function movePiece({ piece, direction, flags, sound }) {
 }
 
 function spawn(pieceName, flags = { subscriber: false }) {
-  const { subscriber = false } = flags
+  const { subscriber = false } = flags;
 
   if (!pieces.has(pieceName) && !subscriberPieces.has(pieceName)) {
     console.log(`There are no pieces that exist with the name ${pieceName}`);
@@ -91,7 +93,9 @@ function spawn(pieceName, flags = { subscriber: false }) {
   }
 
   if (!piece) {
-    console.log('You are not a subscriber. This piece requires a subscription.');
+    console.log(
+      'You are not a subscriber. This piece requires a subscription.',
+    );
 
     return null;
   }
