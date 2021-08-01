@@ -17,3 +17,9 @@ All these Twitch commands create pieces on the stream that you can move around,
 You can also hide the Alpaca, using the `!alpaca-hide` command.
 
 Have fun! Subscribers also get access to `!curl` and `!unicorn`.
+
+<center>
+
+https://user-images.githubusercontent.com/833231/127758724-d00e8f2e-1642-481d-838a-164bfe298448.mp4
+
+</center>
