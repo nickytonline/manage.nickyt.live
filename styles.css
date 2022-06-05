@@ -6,7 +6,7 @@ body {
 }
 
 .piece, .subscriber--piece {
-  --x-position: 95vw;
+  --x-position: 0vw;
   --y-position: 65vh;
   font-size: 5rem;
   position: absolute;
