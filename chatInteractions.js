@@ -9,8 +9,6 @@ const curlingSound = new Audio('/assets/sounds/curling.m4a');
 
 curlingSound.volume = 0.5;
 
-pieces.set('crab', createPiece('🦀'));
-pieces.set('crate', createPiece('📦'));
 pieces.set('todd', createPiece('🦞'));
 pieces.set('poop', createPiece('💩'));
 pieces.set('donut', createPiece('🍩'));
@@ -20,7 +18,7 @@ subscriberPieces.set('unicorn', createPiece('🦄', true));
 
 function createPiece(text, subscriber = false) {
   const piece = Object.assign(document.createElement('div'), {
-    className: subscriber ? 'subscriber--piece' : 'piece',
+    className: `${text} ${subscriber ? 'subscriber--piece' : 'piece'}`,
     innerHTML: text,
   });
 

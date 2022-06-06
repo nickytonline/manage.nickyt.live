@@ -6,17 +6,15 @@ body {
 }
 
 .piece, .subscriber--piece {
-  --x-position: 0vw;
-  --y-position: 65vh;
-  font-size: 5rem;
+  font-size: 4rem;
   position: absolute;
   transform: translate(var(--x-position), var(--y-position));
   transition: opacity 1s ease-in, transform 1s ease-in-out;
   opacity: 0;
 }
 
-.subscriber--piece {
-  --y-position: 15vh;
+.piece {
+  --x-position: 3vw;
 }
 
 .alpaca {
@@ -30,6 +28,28 @@ body {
   background-image: url(assets/images/alpaca.png);
   background-size: cover;
   transition: transform 1s ease-in-out;
+}
+
+.🥌 {
+  --x-position: 90vw;
+  --y-position: 0vh;
+}
+
+.🦄 {
+  --x-position: 3vw;
+  --y-position: 55vh;
+}
+
+.🦞{
+  --y-position: 45vh;
+}
+
+.💩 {
+  --y-position: 35vh;
+}
+
+.🍩 {
+  --y-position: 25vh;
 }
 
 .alpaca--hide {
