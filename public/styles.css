@@ -37,7 +37,7 @@ body {
 
 .🦄 {
   --x-position: 3vw;
-  --y-position: 55vh;
+  --y-position: 15vh;
 }
 
 .🦞{
@@ -54,4 +54,9 @@ body {
 
 .alpaca--hide {
   --y-position: 218px;
+}
+
+.confetti {
+  width: 100vw;
+  height: 100vh;
 }

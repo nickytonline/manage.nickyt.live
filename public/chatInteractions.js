@@ -6,8 +6,26 @@ const pieces = new Map();
 const subscriberPieces = new Map();
 const CURLING_PIECENAME = 'curl';
 const curlingSound = new Audio('/assets/sounds/curling.m4a');
+const confettiSound = new Audio('/assets/sounds/emojipalooza.m4a');
+const confettiEmojis = [
+  '🌈',
+  '🦄',
+  '💩',
+  '🍩',
+  '🙃',
+  '😎',
+  '😂',
+  '🤡',
+  '🤠',
+  '🤩',
+  '😱',
+  '🤪',
+];
+
+let jsConfetti;
 
 curlingSound.volume = 0.5;
+confettiSound.volume = 0.5;
 
 pieces.set('todd', createPiece('🦞'));
 pieces.set('poop', createPiece('💩'));
@@ -115,7 +133,7 @@ function spawn(pieceName, flags = { subscriber: false }) {
 
 let alpacaTimeout = 0;
 
-function handleAlpaca(command) {
+function handleAlpaca(command, timeout = 5000) {
   if (alpacaTimeout) {
     clearTimeout(alpacaTimeout);
   }
@@ -126,7 +144,7 @@ function handleAlpaca(command) {
 
       alpacaTimeout = setTimeout(() => {
         alpaca.classList.remove('alpaca--hide');
-      }, 11000);
+      }, timeout);
       break;
     }
 
@@ -135,7 +153,35 @@ function handleAlpaca(command) {
   }
 }
 
+function getRandomEmoji() {
+  return confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+}
+
+function confetti(flags = { subscriber: false }) {
+  let confettiConfig = {
+    confettiNumber: 250,
+  };
+
+  handleAlpaca('hide', 2300);
+  confettiSound.play();
+
+  if (flags.subscriber) {
+    confettiConfig = {
+      ...confettiConfig,
+      emojis: [getRandomEmoji()],
+      emojiSize: 100,
+      confettiNumber: 250,
+      confettiRadius: 20,
+    };
+  }
+
+  jsConfetti.addConfetti(confettiConfig);
+}
+
 export function inializeChatInteractions() {
+  const canvas = document.querySelector('.confetti');
+  jsConfetti = new JSConfetti({ canvas });
+
   ComfyJS.onCommand = (user, command, message, flags, extra) => {
     const [pieceName, pieceCommand] = command.split('-');
 
@@ -143,6 +189,11 @@ export function inializeChatInteractions() {
       case 'alpaca':
         handleAlpaca(pieceCommand);
         break;
+
+      case 'confetti': {
+        confetti(flags);
+        break;
+      }
 
       default: {
         const sound = pieceName === CURLING_PIECENAME ? curlingSound : null;
