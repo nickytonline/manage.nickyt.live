@@ -23,6 +23,7 @@ const confettiEmojis = [
 ];
 
 let jsConfetti;
+let confettiCount = 0;
 
 curlingSound.volume = 0.5;
 confettiSound.volume = 0.5;
@@ -158,19 +159,21 @@ function getRandomEmoji() {
 }
 
 function confetti(flags = { subscriber: false }) {
+  confettiCount++;
+
   let confettiConfig = {
-    confettiNumber: 250,
+    confettiNumber: 50,
   };
 
   handleAlpaca('hide', 2300);
-  confettiSound.play();
 
   if (flags.subscriber) {
+    confettiSound.play();
     confettiConfig = {
       ...confettiConfig,
-      emojis: [getRandomEmoji()],
+      emojis: confettiCount % 5 === 0 ? confettiEmojis : [getRandomEmoji()],
       emojiSize: 100,
-      confettiNumber: 250,
+      confettiNumber: 100,
       confettiRadius: 20,
     };
   }
