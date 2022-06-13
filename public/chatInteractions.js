@@ -1,3 +1,5 @@
+import pThrottle from 'https://unpkg.com/p-throttle@5.0.0/index.js';
+
 const MOVE_DISTANCE = 4;
 const DIRECTIONS = Object.freeze(['left', 'right', 'up', 'down']);
 const alpaca = document.querySelector('.alpaca');
@@ -158,7 +160,12 @@ function getRandomEmoji() {
   return confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
 }
 
-function confetti(flags = { subscriber: false }) {
+const throttle = pThrottle({
+  limit: 1,
+  interval: 45000,
+});
+
+const confetti = throttle((flags = { subscriber: false }) => {
   confettiCount++;
 
   let confettiConfig = {
@@ -173,13 +180,13 @@ function confetti(flags = { subscriber: false }) {
       ...confettiConfig,
       emojis: confettiCount % 5 === 0 ? confettiEmojis : [getRandomEmoji()],
       emojiSize: 100,
-      confettiNumber: 100,
+      confettiNumber: confettiCount % 5 === 0 ? 150 : 50,
       confettiRadius: 20,
     };
   }
 
   jsConfetti.addConfetti(confettiConfig);
-}
+});
 
 export function inializeChatInteractions() {
   const canvas = document.querySelector('.confetti');
