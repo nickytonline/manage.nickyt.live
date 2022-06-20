@@ -1,0 +1,24 @@
+body {
+  --main-brown: rgb(50, 43, 45);
+  color: var(--main-brown);
+  font-family: 'Open Sans', sans-serif;
+  background-color: #7c6b6285;
+  border-top: 10px solid var(--main-brown);
+  background-color: #f6f3ec;
+}
+
+.angled-panel {
+  position: absolute;
+  width: 1920px;
+  height: 223px;
+  bottom: 0px;
+  /* background-color: white; */
+  background-color: rgb(254, 219, 149);
+  border-top: 10px solid var(--main-brown);
+  padding: 1rem;
+}
+
+.missing-guest {
+  font-size: 5rem;
+  color: var(--main-brown);
+}

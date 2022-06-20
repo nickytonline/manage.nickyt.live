@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/modern-css-reset/dist/reset.min.css"
+    />
+
+    <link rel="stylesheet" href="./background-styles.css" />
+  </head>
+  <body>
+    <header class="angled-panel">
+      <h1 id="title"></h1>
+      <h2 id="guest"></h2>
+    </header>
+    <form name="guestForm">
+      <h3 class="missing-guest">The guest information is missing. Ahhh!</h3>
+      <label>
+        Title
+        <input type="text" name="title" />
+      </label>
+      <label>
+        Guest
+        <input type="text" name="guest" />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+    <script type="module" src="./background.js"></script>
+  </body>
+</html>
