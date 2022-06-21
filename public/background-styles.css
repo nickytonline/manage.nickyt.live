@@ -32,4 +32,5 @@ body {
   font-family: 'Bal Jamjuree';
   font-size: 4rem;
   margin: var(--margin);
+  margin-bottom: 5px;
 }
