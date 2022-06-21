@@ -1,11 +1,13 @@
 body {
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   position: relative;
   background-color: #000;
+  height: 100vh;
 }
 
-.piece, .subscriber--piece {
+.piece,
+.subscriber--piece {
   font-size: 4rem;
   position: absolute;
   transform: translate(var(--x-position), var(--y-position));
@@ -32,7 +34,7 @@ body {
 
 .🥌 {
   --x-position: 90vw;
-  --y-position: 0vh;
+  --y-position: -12vh;
 }
 
 .🦄 {
@@ -40,7 +42,7 @@ body {
   --y-position: 15vh;
 }
 
-.🦞{
+.🦞 {
   --y-position: 45vh;
 }
 
