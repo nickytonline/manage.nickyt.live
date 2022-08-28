@@ -135,6 +135,17 @@ function spawn(pieceName, flags = { subscriber: false }) {
 }
 
 let alpacaTimeout = 0;
+const ALPACA_HATS = Object.freeze([
+  'croissant',
+  'graduation',
+  'crown',
+  'ball-cap',
+  'top-hat',
+]);
+
+function getAlpacaHat() {
+  return ALPACA_HATS[Math.floor(Math.random() * ALPACA_HATS.length)];
+}
 
 function handleAlpaca(command, timeout = 5000) {
   if (alpacaTimeout) {
@@ -147,6 +158,7 @@ function handleAlpaca(command, timeout = 5000) {
 
       alpacaTimeout = setTimeout(() => {
         alpaca.classList.remove('alpaca--hide');
+        alpaca.classList.add(getAlpacaHat());
       }, timeout);
       break;
     }
@@ -187,6 +199,8 @@ const confetti = throttle((flags = { subscriber: false }) => {
 
   jsConfetti.addConfetti(confettiConfig);
 });
+
+setInterval(() => handleAlpaca('hide'), 300000);
 
 export function inializeChatInteractions() {
   const canvas = document.querySelector('.confetti');

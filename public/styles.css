@@ -32,6 +32,47 @@ body {
   transition: transform 1s ease-in-out;
 }
 
+.alpaca::before {
+  content: '';
+  font-size: 6rem;
+  position: absolute;
+}
+
+.alpaca.croissant::before {
+  content: '🥐';
+  transform: rotate(-140deg);
+  top: -5.5rem;
+  left: 2rem;
+}
+
+.alpaca.graduation::before {
+  content: '🎓';
+  transform: rotate(-15deg);
+  top: -4rem;
+  left: 1.5rem;
+}
+
+.alpaca.crown::before {
+  content: '👑';
+  transform: rotate(-10deg);
+  top: -4.5rem;
+  left: 2rem;
+}
+
+.alpaca.ball-cap::before {
+  content: '🧢';
+  transform: scaleX(-1);
+  top: -3.5rem;
+  left: 2.5rem;
+}
+
+.alpaca.top-hat::before {
+  content: '🎩';
+  transform: rotate(-15deg);
+  top: -5rem;
+  left: 1.5rem;
+}
+
 .🥌 {
   --x-position: 90vw;
   --y-position: -12vh;
@@ -55,7 +96,7 @@ body {
 }
 
 .alpaca--hide {
-  --y-position: 218px;
+  --y-position: 278px;
 }
 
 .confetti {
