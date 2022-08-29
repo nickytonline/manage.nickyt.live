@@ -147,6 +147,8 @@ function getAlpacaHat() {
   return ALPACA_HATS[Math.floor(Math.random() * ALPACA_HATS.length)];
 }
 
+let currentHat;
+
 function handleAlpaca(command, timeout = 5000) {
   if (alpacaTimeout) {
     clearTimeout(alpacaTimeout);
@@ -158,7 +160,10 @@ function handleAlpaca(command, timeout = 5000) {
 
       alpacaTimeout = setTimeout(() => {
         alpaca.classList.remove('alpaca--hide');
-        alpaca.classList.add(getAlpacaHat());
+        currentHat && alpaca.classList.remove(currentHat);
+        currentHat = getAlpacaHat();
+
+        alpaca.classList.add(currentHat);
       }, timeout);
       break;
     }
