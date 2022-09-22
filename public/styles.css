@@ -73,6 +73,13 @@ body {
   left: 1.5rem;
 }
 
+.alpaca.goblin::before {
+  content: '👺';
+  transform: rotate(-10deg) scale(1.9);
+  top: 3rem;
+  left: 4.7rem;
+}
+
 .🥌 {
   --x-position: 90vw;
   --y-position: -12vh;

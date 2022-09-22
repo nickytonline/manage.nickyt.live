@@ -141,6 +141,7 @@ const ALPACA_HATS = Object.freeze([
   'crown',
   'ball-cap',
   'top-hat',
+  'goblin',
 ]);
 
 function getAlpacaHat() {
