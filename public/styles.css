@@ -87,6 +87,13 @@ body {
   left: 11.8rem;
 }
 
+.alpaca.drink::before {
+  content: '🍹';
+  transform: rotate(-15deg) scaleX(-1);
+  top: 6.5rem;
+  left: 8.75rem;
+}
+
 .🥌 {
   --x-position: 90vw;
   --y-position: -12vh;
