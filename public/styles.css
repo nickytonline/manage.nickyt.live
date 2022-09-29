@@ -80,13 +80,6 @@ body {
   left: 4.7rem;
 }
 
-.alpaca.speech-balloon::before {
-  content: '💬';
-  transform: rotate(-15deg) scale(1.9);
-  top: -3.5rem;
-  left: 11.8rem;
-}
-
 .alpaca.drink::before {
   content: '🍹';
   transform: rotate(-15deg) scaleX(-1);
