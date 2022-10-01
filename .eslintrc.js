@@ -8,4 +8,8 @@ module.exports = {
     ecmaVersion: 2021,
     sourceType: 'module',
   },
+  globals: {
+    ComfyJS: false,
+    JSConfetti: false,
+  },
 };
