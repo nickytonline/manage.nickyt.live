@@ -9,6 +9,7 @@ const subscriberPieces = new Map();
 const CURLING_PIECENAME = 'curl';
 const curlingSound = new Audio('/assets/sounds/curling.m4a');
 const confettiSound = new Audio('/assets/sounds/emojipalooza.m4a');
+const yoloSound = new Audio('/assets/sounds/YOLO-lets-go.wav');
 const confettiEmojis = [
   '🌈',
   '🦄',
@@ -207,6 +208,10 @@ const confetti = throttle((flags = { subscriber: false }) => {
   jsConfetti.addConfetti(confettiConfig);
 });
 
+function yolo() {
+  yoloSound.play();
+}
+
 setInterval(() => handleAlpaca('hide'), 300000);
 
 export function inializeChatInteractions() {
@@ -223,6 +228,13 @@ export function inializeChatInteractions() {
 
       case 'confetti': {
         confetti(flags);
+        break;
+      }
+
+      case 'yolo': {
+        if (flags.subscriber) {
+          yolo();
+        }
         break;
       }
 
