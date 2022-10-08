@@ -144,6 +144,7 @@ const ALPACA_HATS = Object.freeze([
   'top-hat',
   'goblin',
   'drink',
+  'mohawk-mountain',
 ]);
 
 function getAlpacaHat() {

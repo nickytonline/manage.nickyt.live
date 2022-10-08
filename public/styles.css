@@ -87,6 +87,13 @@ body {
   left: 8.75rem;
 }
 
+.alpaca.mohawk-mountain::before {
+  content: '🏔';
+  transform: rotate(10deg);
+  top: -4.7rem;
+  left: 3.2rem;
+}
+
 .🥌 {
   --x-position: 90vw;
   --y-position: -12vh;
