@@ -124,3 +124,21 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+.command-images img {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 420px;
+  opacity: 0;
+}
+
+.command-images img[data-active='true'] {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.command-images img[data-active='false'] {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}

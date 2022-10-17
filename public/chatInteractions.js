@@ -38,6 +38,10 @@ pieces.set('donut', createPiece('🍩'));
 subscriberPieces.set(CURLING_PIECENAME, createPiece('🥌', true));
 subscriberPieces.set('unicorn', createPiece('🦄', true));
 
+const freshImage = document.querySelector('.fresh-image');
+const beansImage = document.querySelector('.beans-image');
+const nachoImage = document.querySelector('.nacho-image');
+
 function createPiece(text, subscriber = false) {
   const piece = Object.assign(document.createElement('div'), {
     className: `${text} ${subscriber ? 'subscriber--piece' : 'piece'}`,
@@ -213,6 +217,39 @@ function yolo() {
   yoloSound.play();
 }
 
+function hideCommandImages() {
+  for (const image of document.querySelectorAll('.command-images img')) {
+    image.dataset.active = false;
+  }
+}
+
+function hellaFresh() {
+  hideCommandImages();
+  freshImage.dataset.active = true;
+
+  setTimeout(() => {
+    freshImage.dataset.active = false;
+  }, 5000);
+}
+
+function coolBeans() {
+  hideCommandImages();
+  beansImage.dataset.active = true;
+
+  setTimeout(() => {
+    beansImage.dataset.active = false;
+  }, 5000);
+}
+
+function nacho() {
+  hideCommandImages();
+  nachoImage.dataset.active = true;
+
+  setTimeout(() => {
+    nachoImage.dataset.active = false;
+  }, 5000);
+}
+
 setInterval(() => handleAlpaca('hide'), 300000);
 
 export function inializeChatInteractions() {
@@ -223,6 +260,15 @@ export function inializeChatInteractions() {
     const [pieceName, pieceCommand] = command.split('-');
 
     switch (pieceName) {
+      case 'fresh':
+        hellaFresh();
+        break;
+      case 'beans':
+        coolBeans();
+        break;
+      case 'nacho':
+        nacho();
+        break;
       case 'alpaca':
         handleAlpaca(pieceCommand);
         break;
