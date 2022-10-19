@@ -261,13 +261,19 @@ export function inializeChatInteractions() {
 
     switch (pieceName) {
       case 'fresh':
-        hellaFresh();
+        if (flags.subscriber) {
+          hellaFresh();
+        }
         break;
       case 'beans':
-        coolBeans();
+        if (flags.subscriber) {
+          coolBeans();
+        }
         break;
       case 'nacho':
-        nacho();
+        if (flags.subscriber) {
+          nacho();
+        }
         break;
       case 'alpaca':
         handleAlpaca(pieceCommand);
