@@ -41,3 +41,17 @@ body {
   top: -4.5rem;
   font-size: 21rem;
 }
+
+.logo {
+  margin-bottom: -0.79rem;
+  font-family: 'Bai Jamjuree';
+  font-weight: 'bold';
+  font-size: 4rem;
+}
+
+.logo::after {
+  content: 'live';
+  font-size: 2rem;
+  vertical-align: super;
+  color: #823c14;
+}
