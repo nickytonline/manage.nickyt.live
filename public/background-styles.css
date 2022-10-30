@@ -49,9 +49,8 @@ body {
   font-size: 4rem;
 }
 
-.logo::after {
-  content: 'live';
-  font-size: 2rem;
-  vertical-align: super;
-  color: #823c14;
+.logo .live {
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--main-brown);
 }
