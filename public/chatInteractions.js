@@ -41,6 +41,7 @@ subscriberPieces.set('unicorn', createPiece('🦄', true));
 const freshImage = document.querySelector('.fresh-image');
 const beansImage = document.querySelector('.beans-image');
 const nachoImage = document.querySelector('.nacho-image');
+const lemonImage = document.querySelector('.lemon-image');
 
 function createPiece(text, subscriber = false) {
   const piece = Object.assign(document.createElement('div'), {
@@ -223,32 +224,21 @@ function hideCommandImages() {
   }
 }
 
-function hellaFresh() {
-  hideCommandImages();
-  freshImage.dataset.active = true;
+function imageToggler(image) {
+  return () => {
+    hideCommandImages();
+    image.dataset.active = true;
 
-  setTimeout(() => {
-    freshImage.dataset.active = false;
-  }, 5000);
+    setTimeout(() => {
+      image.dataset.active = false;
+    }, 5000);
+  };
 }
 
-function coolBeans() {
-  hideCommandImages();
-  beansImage.dataset.active = true;
-
-  setTimeout(() => {
-    beansImage.dataset.active = false;
-  }, 5000);
-}
-
-function nacho() {
-  hideCommandImages();
-  nachoImage.dataset.active = true;
-
-  setTimeout(() => {
-    nachoImage.dataset.active = false;
-  }, 5000);
-}
+const hellaFresh = imageToggler(freshImage);
+const coolBeans = imageToggler(beansImage);
+const nacho = imageToggler(nachoImage);
+const lemon = imageToggler(lemonImage);
 
 setInterval(() => handleAlpaca('hide'), 300000);
 
@@ -274,6 +264,9 @@ export function inializeChatInteractions() {
         if (flags.subscriber) {
           nacho();
         }
+        break;
+      case 'lemon':
+        lemon();
         break;
       case 'alpaca':
         handleAlpaca(pieceCommand);

@@ -130,6 +130,7 @@ body {
   top: -20px;
   right: 0;
   width: 420px;
+  aspect-ratio: 16/9;
   opacity: 0;
 }
 
