@@ -54,3 +54,9 @@ body {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: var(--main-brown);
 }
+
+.logo .dot {
+  -webkit-text-fill-color: red;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--main-brown);
+}
