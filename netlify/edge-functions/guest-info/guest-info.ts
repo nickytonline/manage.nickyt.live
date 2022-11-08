@@ -25,12 +25,9 @@ async function getStreamGuestUrl(streamDate: string) {
 
   const { records } = await response.json();
 
-  let redirectUrl;
+  let redirectUrl = '/background.html';
 
-  if (records.length === 0) {
-    // If for some reason there is no record for the day of the stream, this URL will tell me when it loads in OBS
-    redirectUrl = 'https://streamtastic.netlify.app/background.html';
-  } else {
+  if (records.length > 0) {
     const streamGuestInfo = records[0]?.fields;
     const encodedStreamTitle = encodeURIComponent(
       streamGuestInfo['Stream Title'],
