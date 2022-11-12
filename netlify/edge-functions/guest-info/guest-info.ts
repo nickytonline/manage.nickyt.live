@@ -25,7 +25,7 @@ async function getStreamGuestUrl(streamDate: string) {
 
   const { records } = await response.json();
 
-  let redirectUrl = '/background.html';
+  let redirectUrl = '/overlays/background';
 
   if (records.length > 0) {
     const streamGuestInfo = records[0]?.fields;
@@ -36,7 +36,7 @@ async function getStreamGuestUrl(streamDate: string) {
       `${streamGuestInfo.Name}, ${streamGuestInfo['Guest Title']}`,
     );
 
-    redirectUrl = `/background.html?title=${encodedStreamTitle}&guest=${encodedGuestTitle}`;
+    redirectUrl += `?title=${encodedStreamTitle}&guest=${encodedGuestTitle}`;
   }
 
   return redirectUrl;
