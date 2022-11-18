@@ -65,9 +65,12 @@ function buildPage(streamGuestInfo: StreamGuestInfo) {
     <link rel="stylesheet" href="/styles/guest-info.css" />
   </head>
   <body>
-    <main class="angled-panel">
+    <header class="angled-panel">
       <h1 id="title">${streamTitle}</h1>
       <h2 id="guest">${guestName}, ${guestTitle}</h2>
+    </header>
+    <main>
+      <div class="melt">🫠</div>
     </main>
     <footer class="footer">
       <p class="logo">
