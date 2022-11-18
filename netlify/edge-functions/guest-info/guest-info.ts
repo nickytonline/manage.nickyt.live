@@ -1,4 +1,8 @@
-import type { Context } from 'https://edge.netlify.com';
+interface StreamGuestInfo {
+  guestName: string;
+  guestTitle: string;
+  streamTitle: string;
+}
 
 const AIRTABLE_API_KEY = Deno.env.get('AIRTABLE_API_KEY');
 const AIRTABLE_STREAM_GUEST_BASE_ID = Deno.env.get(
@@ -25,36 +29,67 @@ async function getStreamGuestUrl(streamDate: string) {
 
   const { records } = await response.json();
 
-  let redirectUrl = '/overlays/background';
+  const streamGuestInfo: StreamGuestInfo = {
+    guestName: records[0]?.fields.Name,
+    guestTitle: records[0]?.fields['Guest Title'],
+    streamTitle: records[0]?.fields['Stream Title'],
+  };
 
-  if (records.length > 0) {
-    const streamGuestInfo = records[0]?.fields;
-    const encodedStreamTitle = encodeURIComponent(
-      streamGuestInfo['Stream Title'],
-    );
-    const encodedGuestTitle = encodeURIComponent(
-      `${streamGuestInfo.Name}, ${streamGuestInfo['Guest Title']}`,
-    );
-
-    redirectUrl += `?title=${encodedStreamTitle}&guest=${encodedGuestTitle}`;
-  }
-
-  return redirectUrl;
+  return streamGuestInfo;
 }
 
-export default async (_request: Request, context: Context) => {
+function buildPage(streamGuestInfo: StreamGuestInfo) {
+  const {
+    guestName = 'NO GUEST!!!!!!',
+    guestTitle = 'NO GUEST TITLE!!!!!!',
+    streamTitle = 'NO STREAM TITLE!!!!!!',
+  } = streamGuestInfo;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stream Guest Info</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/modern-css-reset/dist/reset.min.css"
+    />
+    <style>
+      body {
+        font-family: 'Bai Jamjuree';
+        font-weight: bold;
+      }
+    </style>
+    <link rel="stylesheet" href="/styles/guest-info.css" />
+  </head>
+  <body>
+    <main class="angled-panel">
+      <h1 id="title">${streamTitle}</h1>
+      <h2 id="guest">${guestName}, ${guestTitle}</h2>
+    </main>
+    <footer class="footer">
+      <p class="logo">
+        iamdeveloper<span class="live"><span class="dot">.</span>live</span>
+      </p>
+    </footer>
+  </body>
+</html>
+`;
+}
+
+export default async (_request: Request) => {
   const today = new Date();
   const streamDate = today.toISOString().slice(0, 10);
-  const redirectUrl = await getStreamGuestUrl(streamDate);
+  const streamGuestInfo = await getStreamGuestUrl(streamDate);
 
-  context.log('Guest stream info redirect URL', redirectUrl);
-
-  return new Response('The request to this URL was logged', {
-    status: 302,
+  return new Response(buildPage(streamGuestInfo), {
+    status: 200,
     headers: {
-      Location: redirectUrl,
       // Cache for two minutes in case I need to adjust the guest info before a stream
       'Cache-Control': 'max-age=120',
+      'Content-Type': 'text/html',
     },
   });
 };
