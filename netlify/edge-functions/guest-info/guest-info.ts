@@ -90,8 +90,8 @@ export default async (_request: Request) => {
   return new Response(buildPage(streamGuestInfo), {
     status: 200,
     headers: {
-      // Cache for two minutes in case I need to adjust the guest info before a stream
-      'Cache-Control': 'max-age=120',
+      // Cache for five minutes in case I need to adjust the guest info before a stream
+      'Cache-Control': 'max-age=300',
       'Content-Type': 'text/html',
     },
   });
