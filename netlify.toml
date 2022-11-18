@@ -3,4 +3,4 @@
 
 [[edge_functions]]
 function = "guest-info"
-path = "/api/v1/guest-info"
+path = "/guest-info"

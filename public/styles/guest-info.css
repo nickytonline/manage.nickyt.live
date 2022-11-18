@@ -20,11 +20,6 @@ body {
   padding: var(--margin);
 }
 
-.missing-guest {
-  font-size: 5rem;
-  color: var(--main-brown);
-}
-
 .footer {
   position: absolute;
   bottom: 0;
