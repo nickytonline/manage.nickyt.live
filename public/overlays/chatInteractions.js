@@ -224,21 +224,21 @@ function hideCommandImages() {
   }
 }
 
-function imageToggler(image) {
+function imageToggler(image, timeoutInMs = 3000) {
   return () => {
     hideCommandImages();
     image.dataset.active = true;
 
     setTimeout(() => {
       image.dataset.active = false;
-    }, 5000);
+    }, timeoutInMs);
   };
 }
 
-const hellaFresh = imageToggler(freshImage);
-const coolBeans = imageToggler(beansImage);
+const hellaFresh = imageToggler(freshImage, 2200);
+const coolBeans = imageToggler(beansImage, 2200);
 const nacho = imageToggler(nachoImage);
-const lemon = imageToggler(lemonImage);
+const lemon = imageToggler(lemonImage, 1750);
 
 setInterval(() => handleAlpaca('hide'), 300000);
 
