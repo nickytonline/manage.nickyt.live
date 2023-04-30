@@ -71,10 +71,11 @@ function buildPage(streamGuestInfo: StreamGuestInfo) {
     </header>
     <main>
       <div class="melt">🫠</div>
+      <p class="schedule">idev.fyi/schedule</p>
     </main>
     <footer class="footer">
       <p class="logo">
-        iamdeveloper<span class="live"><span class="dot">.</span>live</span>
+        nickyt<span class="live"><span class="dot">.</span>live</span>
       </p>
     </footer>
   </body>
