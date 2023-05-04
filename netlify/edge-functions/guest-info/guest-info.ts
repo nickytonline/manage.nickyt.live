@@ -71,7 +71,6 @@ function buildPage(streamGuestInfo: StreamGuestInfo) {
     </header>
     <main>
       <div class="melt">🫠</div>
-      <p class="schedule">idev.fyi/schedule</p>
     </main>
     <footer class="footer">
       <p class="logo">

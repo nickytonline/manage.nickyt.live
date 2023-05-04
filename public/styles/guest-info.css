@@ -55,11 +55,3 @@ body {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: var(--main-brown);
 }
-
-.schedule {
-  display: grid;
-  justify-content: center;
-  align-items: end;
-  font-size: 2rem;
-  height: 78.5vh;
-}
