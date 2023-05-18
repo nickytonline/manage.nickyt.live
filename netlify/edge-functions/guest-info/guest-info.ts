@@ -67,7 +67,7 @@ function buildPage(streamGuestInfo: StreamGuestInfo) {
   <body>
     <header class="angled-panel">
       <h1 id="title">${streamTitle}</h1>
-      <h2 id="guest">${guestName}${guestTitle ? ` , ${guestTitle}` : ''}</h2>
+      <h2 id="guest">${guestName}${guestTitle ? `, ${guestTitle}` : ''}</h2>
     </header>
     <main>
       <div class="melt">🫠</div>
