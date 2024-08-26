@@ -245,8 +245,25 @@ setInterval(() => handleAlpaca('hide'), 300000);
 export function inializeChatInteractions() {
   const canvas = document.querySelector('.confetti');
   jsConfetti = new JSConfetti({ canvas });
+  const pinnedMessage = document.querySelector('#pinned-message');
+  const allowedUsers = ["dianasoyster", "nickytonline"];
 
   ComfyJS.onCommand = (user, command, message, flags, extra) => {
+    if (allowedUsers.includes(user)) {
+      if (command === 'pin') {
+        pinnedMessage.innerHTML = message;
+        pinnedMessage.classList.remove('hidden');
+        console.log({user, command, message, flags, extra});
+        return
+      }
+
+      if (command === 'unpin') {
+        pinnedMessage.innerHTML = '';
+        pinnedMessage.classList.add('hidden');
+        return
+      }
+    }
+
     const [pieceName, pieceCommand] = command.split('-');
 
     switch (pieceName) {

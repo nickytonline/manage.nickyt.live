@@ -143,3 +143,20 @@ body {
   opacity: 0;
   transition: opacity 1s ease-out;
 }
+
+#pinned-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+}
+
+.hidden {
+  display: none;
+}
